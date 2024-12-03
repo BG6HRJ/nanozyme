@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nanozyme of AHUCM</title>
+    <link href="{{ url_for('static', filename='layui/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+<!-- 主体内容 -->
+<!-- 导航栏 -->
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a href="/" style="position: absolute; top: -8px; left: 50px; width: 260px; height: 80px;
+               background:url(../static/img/logo.jpg) no-repeat; background-size:contain"></a>
+            <li class="layui-nav-item nav-left" style="margin-left:320px;">
+                <a href="/">HOME</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="gpt">GPT</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="javascript:">PREDICTION</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="base">TYPE</a></dd>
+                    <dd><a href="advanced">ACTIVITY</a></dd>
+                    <dd><a href="compare_predictions">COMPARE PREDICTIONS</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-this" style="margin-left: 20px;">
+                <a href="database">DATA CENTER</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="offer_a_sample">OFFER A SAMPLE</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="about">ABOUT</a>
+            </li>
+        </ul>
+<!--        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+            <li class="layui-nav-item">
+                <a href="javascript:">USER</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:">LOGOUT</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+    </div>
+</div>
+
+<div style="width: 90%; margin: auto; margin-top: 20px">
+    <p style="font-weight: bold; font-size: 26px;;margin-bottom: 20px">Nanozymes database</p>
+    <div class="layuimini-container">
+        <div class="layuimini-main">
+            <fieldset class="table-search-fieldset" style="margin-bottom: 35px">
+                <legend>Search Information</legend>
+                <div style="margin: 10px 10px 10px 10px" id="btn">
+                    <!-- 表单提交默认是以 GET 请求方式提交，javascript:void(0)保证表单提交时不导航到新界面，从而可以触发监听函数，走ajax请求-->
+                    <form class="layui-form layui-form-pane" action="javascript:void(0);">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label" style="width: 150px">Chemical formula</label>
+                                <div class="layui-input-inline">
+                                    <!--注意此处input标签里的id-->
+                                    <input class="layui-input" name="keyword" id="demoReload" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <!--注意此处button标签里的type属性-->
+                                <button type="button" class="layui-btn layui-btn-primary" lay-submit data-type="reload"
+                                        lay-filter="data-search-btn"><i class="layui-icon"></i> search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+            <!--注意此处table标签里的id-->
+            <table class="layui-hide" id="ID-table-database"></table>
+            <!--<table class="layui-table layui-hide" id="test" lay-filter="test"></table>-->
+        </div>
+    </div>
+    <!--<table class="layui-hide" id="ID-table-database"></table>-->
+</div>
+
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='darkreader/darkreader.min.js') }}"></script>
+
+<script>
+
+    DarkReader.enable({
+        brightness: 200,
+        contrast: 150,
+        sepia: -30
+    });
+
+    layui.use(['table', 'jquery'], function () {
+        let table = layui.table;
+        let $ = layui.jquery
+        let form = layui.form
+
+        table.render({
+            elem: '#ID-table-database',
+            url: '/nano_enzy_data/data',
+            page: true, // 开启分页
+            cols: [[ // 表头
+                {field: 'id', title: 'ID', width: 50, sort: true},
+                {field: 'name', title: 'Name', width: 140},
+                {field: 'mimic_enzyme_activity', title: 'Mimic Enzyme Activity', width: 200},
+                {field: 'substrate1', title: 'substrate1', width: 200},
+                {field: 'substrate2', title: 'substrate2', width: 200},
+                {field: 'km_per_mm', title: 'Km/mM', width: 100, sort: true},
+                {field: 'vmax_micro_m_per_s', title: 'Vmax/μM s-1', width: 140, sort: true},
+                {field: 'kcat_per_s', title: 'Kcat/s-1', width: 120, sort: true},
+                {
+                    field: 'data_reference_doi', title: 'more information', width: 150, templet: function (d) {
+                        return '<a class="layui-bg-black" href="/details_page?id=' + d.id + '">details</a>';
+                    }
+                },
+                {
+                    field: 'data_reference_doi', title: 'Link to article', width: 400, templet: function (d) {
+                        var url = 'https://doi.org/' + d.data_reference_doi;
+                        return '<a href="' + url + '" target="_blank">' + url + '</a>';
+                    }
+                },
+            ]],
+            limit: 15,
+            limits: [15]
+        });
+
+        //实现输入框内回车，触发bottom点击事件
+        layui.use('form', function () {
+            var form = layui.form;
+
+            // 获取输入框和按钮
+            var inputElement = document.getElementById('demoReload');
+            var buttonElement = document.querySelector('[lay-filter="data-search-btn"]');
+
+            // 监听输入框的键盘事件
+            inputElement.addEventListener('keyup', function (event) {
+                if (event.key === 'Enter') {
+                    // 如果按下的是回车键，触发按钮的点击事件
+                    buttonElement.click();
+                }
+            });
+        });
+
+        //查询事件
+        form.on('submit(data-search-btn)', function (data) {
+            var search_data = data.field
+            console.log(search_data)
+
+            //执行ajax请求
+            $.ajax({
+                url: '/nano_enzy_data/search',
+                data: JSON.stringify(data.field),
+                dataType: 'json',
+                contentType: 'application/json',
+                type: 'post',
+                success: function (result) {
+                    console.log(result['data'])
+
+                    table.render({
+                        elem: '#ID-table-database',
+                        page: true, // 开启分页
+                        cols: [[ // 表头
+                            {field: 'id', title: 'ID', width: 100, sort: true},
+                            {field: 'name', title: 'Name', width: 150},
+                            {field: 'mimic_enzyme_activity', title: 'Mimic Enzyme Activity', width: 200},
+                            {field: 'substrate1', title: 'substrate1', width: 140},
+                            {field: 'substrate2', title: 'substrate2', width: 140},
+                            {field: 'km_per_mm', title: 'Km/mM', width: 100, sort: true},
+                            {field: 'vmax_micro_m_per_s', title: 'Vmax/μM s-1', width: 140, sort: true},
+                            {field: 'kcat_per_s', title: 'Kcat/s-1', width: 120, sort: true},
+                            {
+                                field: 'data_reference_doi',
+                                title: 'more information',
+                                width: 150,
+                                templet: function (d) {
+                                    return '<a class="layui-bg-black" href="/details_page?id=' + d.id + '">details</a>';
+                                }
+                            },
+                            {
+                                field: 'data_reference_doi',
+                                title: 'Link to article',
+                                width: 360,
+                                templet: function (d) {
+                                    var url = 'https://doi.org/' + d.data_reference_doi;
+                                    return '<a href="' + url + '" target="_blank">' + url + '</a>';
+                                }
+                            }
+                        ]],
+                        data: result['data'],
+                        limit: 15,
+                        limits: [15]
+                    });
+                },
+                error: function () {
+                    layer.alert('Please Log in First');
+                }
+            })
+        }),
+
+            //退出登录
+            document.getElementById("logout").addEventListener('click', function () {
+                $.ajax({
+                    url: '/user/logout',
+                    type: "post",
+                    success: function () {
+                        layer.alert("Logout Success")
+                    },
+                    error: function () {
+                        layer.alert("You are not logged in")
+                    }
+                })
+            })
+
+    })
+</script>
+</body>
+</html>
+
+<!--页脚-->
+<footer style="position: fixed; bottom: 0px; width: 100%; height:60px;
+            background-color: #eee;
+            text-align: center;">
+    <div style="margin-top: 14px">
+        <p>AHUCM 2024 &copy; ahtcm.edu.cn</p>
+        <p>Anhui University of Chinese Medicine</p>
+    </div>
+</footer>

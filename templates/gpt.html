@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Nanozyme of AHUCM</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <link href="{{ url_for('static', filename='layui/css/layui.css') }}" rel="stylesheet">
+    <style>
+        #message-append {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 30px;
+            text-align: justify;
+        }
+
+        body {
+            margin-bottom: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a href="/" style="position: absolute; top: -8px; left: 50px; width: 260px; height: 80px;
+               background:url(../static/img/logo.jpg) no-repeat; background-size:contain"></a>
+            <li class="layui-nav-item nav-left" style="margin-left:320px;">
+                <a href="/">HOME</a>
+            </li>
+            <li class="layui-nav-item layui-this nav-left">
+                <a href="gpt">GPT</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="javascript:">PREDICTION</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="base">TYPE</a></dd>
+                    <dd><a href="advanced">ACTIVITY</a></dd>
+                    <dd><a href="compare_predictions">COMPARE PREDICTIONS</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" style="margin-left: 20px;">
+                <a href="database">DATA CENTER</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="offer_a_sample">OFFER A SAMPLE</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="about">ABOUT</a>
+            </li>
+        </ul>
+<!--        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+            <li class="layui-nav-item">
+                <a href="javascript:">USER</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:">LOGOUT</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+    </div>
+</div>
+
+<div style="width: 90%; margin: auto; margin-top: 20px;">
+
+    <div class="layui-row" style="width: 100%;">
+        <div class="layui-col-md12">
+            <div id="chat-box" style="background-color: #fff;">
+                <p style="font-size: 20px">GPT Generate Synthetic Path of Nanozymes</p>
+                <hr>
+                <p style="font-size: 20px; margin-top: 10px">Question: How to synthesize</p>
+                <div style="margin-top: 10px">
+                    <input type="text" id="message-input" placeholder="Please enter the chemical formula, Fe3O4?"
+                           style="width: 300px; height: 30px; margin: 0">
+                    <button id="send-button" onclick="sendMessage()" lay-on="test-tips-top"
+                            style="width: 60px; height: 34px; margin: 0; margin-left: 10px">Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='darkreader/darkreader.min.js') }}"></script>
+
+<script>
+
+    DarkReader.enable({
+        brightness: 200,
+        contrast: 150,
+        sepia: -30
+    });
+
+    function send_socket(message) {
+        // 创建 WebSocket 连接
+        // let socket = new WebSocket('ws://127.0.0.1:8939/');
+        let socket = new WebSocket('ws://101.33.237.185:8939/');
+
+        // 接收到消息时触发的事件
+        socket.addEventListener('message', (event) => {
+            const currentTime = new Date();
+            const formattedTime = currentTime.toLocaleTimeString();
+            appendMessage('GPT ' + formattedTime, event.data);
+        });
+
+        socket.addEventListener('open', (event) => {
+            console.log('已建立连接', event);
+            let token = "greate ai nano enzymes#"
+            socket.send(token + message);
+        });
+    }
+
+    const chatBox = document.getElementById('chat-box');
+    const messageInput = document.getElementById('message-input');
+
+    function appendMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.setAttribute('id', 'message-append');
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatBox.appendChild(messageElement);
+
+        // 自动滚动到底部
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+        var message = messageInput.value.trim();
+        if (message !== '') {
+            const currentTime = new Date();
+            const formattedTime = currentTime.toLocaleTimeString();
+            message = 'How to synthesize ' + message + '?'
+            appendMessage('You ' + formattedTime, message);
+
+            // 清空输入框
+            messageInput.value = '';
+
+            send_socket(message)
+        }
+        else {
+            layer.msg('Please enter the chemical formula', {icon: 5})
+        }
+    }
+
+    function sendMessage_first() {
+        var message = 'How to synthesize Pd@Pt?'
+        if (message !== '') {
+            const currentTime = new Date();
+            const formattedTime = currentTime.toLocaleTimeString();
+            appendMessage('Demo: ' + formattedTime, message);
+
+            send_socket('demo#' + message)
+        }
+    }
+
+    sendMessage_first();
+
+</script>
+</body>
+</html>
+
+<!--页脚-->
+<footer style="position: fixed; bottom: 0px; width: 100%; height:60px;
+            background-color: #eee;
+            text-align: center;">
+    <div style="margin-top: 14px">
+        <p>AHUCM 2024 &copy; ahtcm.edu.cn</p>
+        <p>Anhui University of Chinese Medicine</p>
+    </div>
+</footer>

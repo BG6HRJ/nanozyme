@@ -1,0 +1,8 @@
+.idea
+migrations
+**/__pycache__
+*.db
+app.py
+test.html
+test.py
+test2.py

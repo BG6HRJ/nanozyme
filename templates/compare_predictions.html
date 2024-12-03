@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nanozyme of AHUCM</title>
+    <link href="{{ url_for('static', filename='layui/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+
+<!-- 导航栏 -->
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a href="/" style="position: absolute; top: -8px; left: 50px; width: 260px; height: 80px;
+               background:url(../static/img/logo.jpg) no-repeat; background-size:contain"></a>
+            <li class="layui-nav-item nav-left" style="margin-left:320px;">
+                <a href="/">HOME</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="gpt">GPT</a>
+            </li>
+            <li class="layui-nav-item nav-left layui-this">
+                <a href="javascript:">PREDICTION</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="base">TYPE</a></dd>
+                    <dd><a href="advanced">ACTIVITY</a></dd>
+                    <dd><a href="compare_predictions">COMPARE PREDICTIONS</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" style="margin-left: 20px;">
+                <a href="database">DATA CENTER</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="offer_a_sample">OFFER A SAMPLE</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="about">ABOUT</a>
+            </li>
+        </ul>
+<!--        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+            <li class="layui-nav-item">
+                <a href="javascript:">USER</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:">LOGOUT</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+    </div>
+</div>
+
+<div style="width: 90%; height: 900px; margin: auto; margin-top: 20px;">
+    <p style="font-weight: bold;font-size :26px;margin-left: 100px">Prediction catalytic activity</p>
+    <p style="font-weight: bold;font-size :22px;margin-left: 100px">Enter the following values to predict nanozyme
+        peroxidase activity</p>
+    <div style="width: 90%; margin-left: 100px; margin-top: 20px;">
+        <form class="layui-form layui-form-pane" id="btn-submit">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Chemical formula</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Chemical_formula" id="Chemical_formula" class="layui-input"
+                               style="position:absolute;z-index:2;width:80%;width: 160px" lay-verify="required"
+                               lay-reqtext="Please enter the chemical formula"
+                               onkeyup="search()" autocomplete="off">
+                        <select type="text" id="selectId0" lay-filter="selectId0" autocomplete="off"
+                                placeholder="移交单位全称" lay-verify="required" class="layui-select" lay-search>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">N</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="N" id="n" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">P</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="P" id="p" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">S</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="S" id="s" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">Si</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Si" id="si" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Se</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Se" id="se" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">B</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="B" id="b" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">F</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="F" id="f" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">Cl</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Cl" id="cl" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Br</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Br" id="br" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">I</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="I" id="i" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Size/nm</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="size" id="size_per_nm" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">Shape</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="shape" id="shape" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Surface modification</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="surface_modification" id="surface_modification" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">Buffer pH value</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="buffer_pH" id="buffer_pH" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Temperature/℃</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="temperature" id="temperature" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">Substrate 1 type</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="substrate_1" id="substrate_1" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 180px">Substrate 2 type</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="substrate_2" id="substrate_2" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 200px">Substrate 2 concentration</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="substrate2_concentration" id="substrate2_concentration"
+                               autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <!-- summit button-->
+            <div class="layui-form-item" style="width: 780px">
+                <div style="float: left;">
+                    <button class="layui-btn" style="background-color: #e36b26 !important;" lay-submit
+                            lay-filter="demo-completion">
+                        Completion
+                    </button>
+                </div>
+                <div style="float: right;">
+                    <button class="layui-btn" style="background-color: #336b03" lay-submit lay-filter="demo-submit">
+                        Predict
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <p style="font-weight: bold;font-size :26px; margin-top: 30px; margin-left: 100px; display: none" id="predTitle">
+        COMPARE PREDICTION</p>
+    <div style="width: 1300px; height: 100px; margin-left: 100px; margin-top: 20px">
+        <table class="layui-hide" id="ID-table-advanced"></table>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='darkreader/darkreader.min.js') }}"></script>
+
+<script>
+    DarkReader.enable({
+        brightness: 200,
+        contrast: 150,
+        sepia: -30
+    });
+
+    // 实现表单同时支持下拉框选择、输入输入与下拉选项模糊配对、手动输入数据
+    layui.use(['form', 'upload'], function () {
+        var form = layui.form
+        let $ = layui.$
+        form.on('select(selectId0)', function (data) {   //选择移交单位 赋值给input框
+            var selectedOption = data.elem.options[data.elem.selectedIndex];
+            var key = selectedOption.text;
+            var value = selectedOption.value;
+            $("#Chemical_formula").val(key + ": " + value);
+            $("#selectId0").next().find("dl").css({"display": "none"});
+            form.render();
+        });
+
+        window.search = function () {
+
+            var value = $("#Chemical_formula").val();
+            $("#selectId0").val(value);
+            form.render();
+            $("#selectId0").next().find("dl").css({"display": "inline"});
+            var dl = $("#selectId0").next().find("dl").children();
+            var j = -1;
+            for (var i = 0; i < dl.length; i++) {
+                if (dl[i].innerHTML.indexOf(value) <= -1) {
+                    dl[i].style.display = "none";
+                    j++;
+                }
+                if (j == dl.length - 1) {
+                    $("#selectId0").next().find("dl").css({"display": "none"});
+                }
+            }
+
+        }
+        // 监听文档的点击事件，实现点击空白处，收起下拉框
+        $(document).on('click', function (e) {
+            var $target = $(e.target);
+
+            if (!$target.is("#Chemical_formula") && !$target.is("#selectId0") && !$target.hasClass("layui-select")) {
+                // 点击空白处，收起下拉框
+                $("#selectId0").next().find("dl").css({"display": "none"});
+            }
+        });
+    });
+
+
+    layui.use(function () {
+        var $ = layui.$;
+        var form = layui.form;
+        var layer = layui.layer;
+        var table = layui.table;
+
+        // 提交事件
+        form.on('submit(demo-submit)', function (data) {
+            var field = data.field; // 获取表单全部字段值
+            console.log(field)
+
+            var tableData = [];  // 在外面定义 tableData
+
+            // 初始化表格
+            $.ajax({
+                url: '/prediction/advanced',
+                data: JSON.stringify(data.field),
+                dataType: 'json',
+                contentType: 'application/json',
+                type: 'post',
+                success: function (result) {
+                    console.log(result['data']);
+                    console.log(tableData)
+                    // 将新的预测结果追加到表格数据中
+                    tableData.push(result['data']);
+
+                    // 已知数据渲染
+                    var inst = table.render({
+                        elem: '#ID-table-advanced',
+                        cols: [[
+                            {field: 'Kcat/s-1', title: 'Kcat/s-1'},
+                            {field: 'Km/mM', title: 'Km/mM'},
+                            {field: 'Vmax/\u03bcM s-1', title: 'Vmax/\u03bcM s-1'}
+                        ]],
+                        data: tableData.slice(),
+                        page: false,
+                    });
+
+                    document.getElementById("predTitle").style.display = "block";
+
+                }
+            });
+
+            return false; // 阻止默认 form 跳转
+        });
+
+        form.on('submit(demo-completion)', function (data) {
+            var field = data.field; // 获取表单全部字段值
+            console.log(field)
+
+            // 此处可执行 Ajax 等操作
+            $.ajax({
+                url: '/nano_enzy_data/completion_data',
+                data: JSON.stringify(data.field),
+                dataType: 'json',
+                contentType: 'application/json',
+                type: 'post',
+                success: function (result) {
+                    console.log(result['data'])
+                    $("#name").val(result['data'][0].name)
+                    $("#n").val(result['data'][0].n)
+                    $("#p").val(result['data'][0].p)
+                    $("#s").val(result['data'][0].s)
+                    $("#si").val(result['data'][0].si)
+                    $("#se").val(result['data'][0].se)
+                    $("#b").val(result['data'][0].b)
+                    $("#f").val(result['data'][0].f)
+                    $("#cl").val(result['data'][0].cl)
+                    $("#br").val(result['data'][0].br)
+                    $("#i").val(result['data'][0].i)
+                    $("#shape").val(result['data'][0].shape)
+                    $("#size_per_nm").val(result['data'][0].size_per_nm)
+                    $("#surface_modification").val(result['data'][0].surface_modification)
+                    $("#buffer_ph_value").val(result['data'][0].buffer_ph_value)
+                    $("#temperature").val(result['data'][0].temperature)
+                    $("#substrate1").val(result['data'][0].substrate1)
+                    $("#substrate2").val(result['data'][0].substrate2)
+                    $("#substrate2_concentration_mm").val(result['data'][0].substrate2_concentration_mm)
+                    // 已知数据渲染
+                }
+            })
+            return false; // 阻止默认 form 跳转
+        });
+    })
+
+    layui.use(['form', 'jquery'], function () {
+
+        //----------模块----------
+        var form = layui.form;
+        var $ = layui.$;
+
+        //动态添加下拉框 同时可以设置默认值
+        $.ajax({
+            url: '/nano_enzy_data/json',
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+
+                    for (var key in data[i]) {
+                        if (data[i].hasOwnProperty(key)) {
+                            var value = data[i][key];
+                            $('#selectId' + i).append(new Option(key, value));
+                        }
+                    }
+                }
+
+                //form.render(); //更新全部表单内容
+                form.render('select'); //刷新表单select选择框渲染
+            }
+        });
+    });
+
+
+</script>
+
+<!--页脚-->
+<footer style="position: fixed; bottom: 0px; width: 100%; height:60px;
+            background-color: #eee;
+            text-align: center;">
+    <div style="margin-top: 14px">
+        <p>AHUCM 2024 &copy; ahtcm.edu.cn</p>
+        <p>Anhui University of Chinese Medicine</p>
+    </div>
+</footer>

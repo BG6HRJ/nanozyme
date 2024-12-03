@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Nanozyme of AHUCM</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <link href="{{ url_for('static', filename='layui/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin-bottom: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a href="/" style="position: absolute; top: -8px; left: 50px; width: 260px; height: 80px;
+               background:url(../static/img/logo.jpg) no-repeat; background-size:contain"></a>
+            <li class="layui-nav-item layui-this nav-left" style="margin-left:320px;">
+                <a href="/">HOME</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="gpt">GPT</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="javascript:">PREDICTION</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="base">TYPE</a></dd>
+                    <dd><a href="advanced">ACTIVITY</a></dd>
+                    <dd><a href="compare_predictions">COMPARE PREDICTIONS</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" style="margin-left: 20px;">
+                <a href="database">DATA CENTER</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="offer_a_sample">OFFER A SAMPLE</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="about">ABOUT</a>
+            </li>
+        </ul>
+<!--        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+            <li class="layui-nav-item">
+                <a href="javascript:">USER</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:">LOGOUT</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+    </div>
+</div>
+
+<div style="width: 90%; margin: auto; margin-top: 20px;">
+
+    <div style="box-sizing: border-box; width: 100%; height: auto; overflow: auto">
+
+        <div style="box-sizing: border-box; float: left; width: 60%; height: 550px;
+        background-color: #495A7E !important; padding: 10px;
+        display: flex; justify-content: center; align-items: center;">
+            <img src="https://gitee.com/wzjahucm/img/raw/master/nano_enzy/introduction.jpg"
+                 style="max-width: 100%; max-height: 100%; object-fit: cover; border: none;">
+        </div>
+
+        <div style="box-sizing: border-box; float: left; width: 40%; height: 550px; background-color: #495A7E !important; padding: 20px;">
+            <h1 style="margin-top: 10px;">Prediction of Nanozyme<br>
+                Catalytic Types and Activities</h1>
+            <div style="font-size: 18px; line-height: 30px;">
+                <p style="margin-top: 20px;">
+                    Integrates ChatGPT and machine learning for the prediction of nanozyme
+                    catalytic types and activities: </p>
+                <br>
+                <ul>
+                    <li><strong>a. Data Collection & Processing:</strong> Aggregating and analyzing data with AI.</li>
+                    <li><strong>b. Algorithm Design:</strong> Crafting and enhancing algorithms for nanozyme analytics.
+                    </li>
+                    <li><strong>c. Web Resources:</strong> Leveraging "AI-ZYMES," a specialized nanozyme toolset.</li>
+                    <li><strong>d. Nanozyme Copilot:</strong> Utilizing AI algorithms to delineate synthesis pathways.
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <p style="font-size: 18px; line-height: 30px; margin-top: 10px">
+                Unleash the Power of Integrated Intelligence! 🌟</p>
+        </div>
+
+    </div>
+
+
+    <div style="box-sizing: border-box; width: 100%; height: auto; margin-top: 20px">
+        <div style="box-sizing: border-box; width: 100%; height: auto; background-color: #f2f2f2; padding: 20px;">
+            <p style="font-size: 18px; line-height: 30px">
+                <b>Discover the breakthrough in nanozyme research with our latest paper, <br>
+                    ChatGPT Combining Machine
+                    Learning for the Prediction of Nanozyme Catalytic Types and Activities. ❤️</b>
+            </p>
+        </div>
+
+        <div style="box-sizing: border-box; width: 100%; height: auto;">
+            <img src="https://gitee.com/wzjahucm/img/raw/master/nano_enzy/dist.jpg"
+                 style="max-width: 100%; max-height: 100%;">
+        </div>
+    </div>
+
+    <div style="box-sizing: border-box; width: 100%; height: auto; margin-top: 20px">
+        <div style="box-sizing: border-box; width: 100%; height: auto; background-color: #f2f2f2; padding: 20px;">
+            <p style="font-size: 18px; line-height: 30px">
+                <b>Delve into our core method: an innovative integration of ChatGPT and machine learning techniques for
+                    precise nanozyme analysis. Explore compelling visuals, from detailed data distributions to
+                    predictive
+                    accuracy heat maps, showcasing our groundbreaking findings. Witness the future of nanozyme catalysis
+                    research unfold through our vivid imagery and cutting-edge approach 💡.</b>
+            </p>
+        </div>
+
+
+        <div style="box-sizing: border-box; width: 100%; height: auto; overflow: auto">
+            <div style="box-sizing: border-box; float: left; width: 59%; height: 700px; background-color: #2b3e65 !important; ">
+                <img src="https://gitee.com/wzjahucm/img/raw/master/nano_enzy/pred.jpg"
+                     style="width: 100%; height: 100%;">
+            </div>
+
+            <div style="box-sizing: border-box; float: left; width: 1%; height: 700px; background-color: #2b3e65 !important; ">
+            </div>
+
+            <div style="box-sizing: border-box; float: left; width: 40%; height: 700px; background-color: #e0e0e0; ">
+                <img src="https://gitee.com/wzjahucm/img/raw/master/nano_enzy/pred_matrix.jpg" style="width: 100%; height: 44%">
+                <div style="box-sizing: border-box; float: left; width: 100%; height: 2%; background-color: #2b3e65 !important; ">
+                </div>
+                <img src="https://gitee.com/wzjahucm/img/raw/master/nano_enzy/pred_km.jpg" style="width: 100%; height: 54%">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div style="box-sizing: border-box; width: 100%; height: auto; margin-top: 20px">
+        <div style="box-sizing: border-box; width: 100%; height: auto; background-color: #f2f2f2; padding: 20px;">
+            <p style="font-size: 18px; line-height: 30px">
+                <b>Unlock Nanozyme Secrets with AI 🌟!</b>
+            </p>
+        </div>
+
+    </div>
+
+    <div style="width: 100%; height: auto; margin-top: 40px; margin-bottom: 100px;
+    display: flex; flex-direction: column; align-items: center;">
+        <div style="overflow: auto">
+            <div style="float: left; display: flex; align-items: center; flex-direction: column; width: 300px; height: 200px;">
+                <img src="{{url_for('static', filename='icon/ai.png')}}" style="width: 80px; height: 80px;">
+                <a href="base"
+                   style="color: white !important; margin-top: 20px;font-size: 1.2em;">TYPE PREDICTION</a>
+                <a href="advanced"
+                   style="color: white !important; font-size: 1.2em; margin-top: 20px;">ACTIVITY PREDICTION</a>
+            </div>
+
+            <div style="float: left; display: flex; align-items: center; flex-direction: column; width: 300px; height: 200px;">
+                <img src="{{url_for('static', filename='icon/path.png')}}" style="width: 80px; height: 80px;">
+                <a href="base"
+                   style="color: white !important; margin-top: 20px;font-size: 1.2em;">GPT FOR SYNTHESIZE PATH</a>
+            </div>
+
+            <div style="float: left; display: flex; align-items: center; flex-direction: column; width: 300px; height: 200px;">
+                <img src="{{url_for('static', filename='icon/search.png')}}" style="width: 80px; height: 80px;">
+                <a href="database"
+                   style="color: white !important; margin-top: 20px;font-size: 1.2em;">DATA CENTER</a>
+            </div>
+
+            <div style="float: left; display: flex; align-items: center; flex-direction: column; width: 300px; height: 200px;">
+                <img src="{{url_for('static', filename='icon/help.png')}}" style="width: 80px; height: 80px;">
+                <a href="about"
+                   style="color: white !important; margin-top: 20px;font-size: 1.2em;">ABOUT</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='darkreader/darkreader.min.js') }}"></script>
+
+<script>
+
+    DarkReader.enable({
+        brightness: 200,
+        contrast: 150,
+        sepia: -30
+    });
+
+</script>
+</body>
+</html>
+
+<!--页脚-->
+<footer style="position: fixed; bottom: 0px; width: 100%; height:60px;
+            background-color: #eee;
+            text-align: center;">
+    <div style="margin-top: 14px">
+        <p>AHUCM 2024 &copy; ahtcm.edu.cn</p>
+        <p>Anhui University of Chinese Medicine</p>
+    </div>
+</footer>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Nanozyme of AHUCM</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <link href="{{ url_for('static', filename='layui/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin-bottom: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- 导航栏 -->
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a href="/" style="position: absolute; top: -8px; left: 50px; width: 260px; height: 80px;
+               background:url(../static/img/logo.jpg) no-repeat; background-size:contain"></a>
+            <li class="layui-nav-item nav-left" style="margin-left:320px;">
+                <a href="/">HOME</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="gpt">GPT</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="javascript:">PREDICTION</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="base">TYPE</a></dd>
+                    <dd><a href="advanced">ACTIVITY</a></dd>
+                    <dd><a href="compare_predictions">COMPARE PREDICTIONS</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" style="margin-left: 20px;">
+                <a href="database">DATA CENTER</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="offer_a_sample">OFFER A SAMPLE</a>
+            </li>
+            <li class="layui-nav-item layui-this">
+                <a href="about">ABOUT</a>
+            </li>
+        </ul>
+<!--        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+            <li class="layui-nav-item">
+                <a href="javascript:">USER</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:">LOGOUT</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+    </div>
+</div>
+
+<div style="width: 90%; margin: auto; margin-top: 10px;">
+    <div style="font-family: Arial, sans-serif; line-height: 25px; font-size: 18px; text-align: justify">
+        <h2 style="color: #007bff !important; line-height: 50px">AI-ZYMES</h2>
+        <p>
+            AI-ZYMES, the website of the Combination of Nanazyme and Artificial Intelligence is an online platform
+            focusing on the research and discussion of the cross-application of nanozyme technology and artificial
+            intelligence in the field of chemistry and computer. This website brings together the latest research
+            results, technological innovations and future trends from experts and researchers in different fields. By
+            providing rich article data and functional predictions, this website aims to promote interdisciplinary
+            communication and cooperation, and promote the development and application of nanozymes and artificial
+            intelligence technologies.
+        </p>
+        <p>
+            Nanozymes is a series of nanomaterials with intrinsic enzyme-like properties. By using artificial
+            intelligence algorithm and large language model, the properties and synthesis paths of existing nanozymes
+            were screened, and a comprehensive and complete database involving nanozymes in existing published articles
+            was established, which provided a research basis for data calculation, experimental design and property
+            prediction of nanozymes. By collecting data from existing articles, a user-friendly and scalable database of
+            more than 400 existing inorganic nanozymes was developed. Based on machine learning method, artificial
+            intelligence algorithm is applied to the intelligent design of catalytic materials and nanozymes, text
+            analysis of the synthesis path of nanozymes is carried out, and guidance development of new nanozymes with
+            ideal properties is promoted. Main application fields: Chemistry, computer. Service scenario: chemical
+            nanozymes research institutions, nanozymes beginners understanding and learning, laboratory design
+            experiment use prediction, etc.
+        </p>
+        <div>
+            <h2 style="color: #FA8D34 !important; line-height: 50px;">Main Advantage</h2>
+            <ul>
+                <li>1. ChatGPT and human -guiding data collection: ChatGPT 4.0 was utilized for initial data extraction,
+                    by optimizing prompt engineering, the ChatGPT’s text mining accuracy reached up to 67.55%.
+                    Considering the unavoidable “Not specified” values caused by ChatGPT, we used group cooperation for
+                    the second-round manual data collection, addressing instances where data were presented in figures
+                    rather than the text section. Reliable data, by ChatGPT and human -guiding data collection, A total
+                    of 1085 pieces of data were collected, and our team ensured the strict reliability and referrability
+                    of the data.
+                </li>
+                <li>2. Compared with the accuracy of previously reported RFR and DNN models, Gradient Boosting
+                    Regression (GBR) model demonstrated superior prediction performance for nanozyme catalytic
+                    activities (R2=0.6476 for Km and R2= 0.95 for K cat). Website provides accurate predictions! The
+                    accuracy of this study is the highest among the publicly available databases.
+                </li>
+                <li>3. A ChatGPT-based nanozyme copilot was developed for guiding the synthesis of nanozymes. Retrieval
+                    augmented generation (Ragas) was firstly introduced to verify the accuracy of the nanozyme copilot’s
+                    response, which reached more than 90%.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='darkreader/darkreader.min.js') }}"></script>
+
+<script>
+
+    DarkReader.enable({
+        brightness: 200,
+        contrast: 150,
+        sepia: -30
+    });
+
+</script>
+</body>
+</html>
+
+<!--页脚-->
+<footer style="position: fixed; bottom: 0px; width: 100%; height:60px;
+            background-color: #eee;
+            text-align: center;">
+    <div style="margin-top: 14px">
+        <p>AHUCM 2024 &copy; ahtcm.edu.cn</p>
+        <p>Anhui University of Chinese Medicine</p>
+    </div>
+</footer>

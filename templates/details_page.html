@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nanozyme of AHUCM</title>
+    <link href="{{ url_for('static', filename='layui/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+<body>
+<!-- 主体内容 -->
+<!-- 导航栏 -->
+<div class="layui-header header">
+    <div class="main">
+        <ul class="layui-nav layui-nav-left" lay-filter="filter">
+            <a href="/" style="position: absolute; top: -8px; left: 50px; width: 260px; height: 80px;
+               background:url(../static/img/logo.jpg) no-repeat; background-size:contain"></a>
+            <li class="layui-nav-item nav-left" style="margin-left:320px;">
+                <a href="/">HOME</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="gpt">GPT</a>
+            </li>
+            <li class="layui-nav-item nav-left">
+                <a href="javascript:">PREDICTION</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="base">TYPE</a></dd>
+                    <dd><a href="advanced">ACTIVITY</a></dd>
+                    <dd><a href="compare_predictions">COMPARE PREDICTIONS</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-this" style="margin-left: 20px;">
+                <a href="database">DATA CENTER</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="offer_a_sample">OFFER A SAMPLE</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="about">ABOUT</a>
+            </li>
+        </ul>
+<!--        <ul class="layui-nav layui-layout-right layui-nav-right" lay-filter="filter">
+            <li class="layui-nav-item">
+                <a href="javascript:">USER</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:">LOGOUT</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+    </div>
+</div>
+
+<!--表单-->
+<!--<div style="width: 1460px; margin: auto; margin-top: 20px">-->
+<!--    <p style="font-weight: bold; font-size: 26px;;margin-bottom: 20px">details information</p>-->
+<!--    <table class="layui-hide" id="ID-table-database-details"></table>-->
+<!--</div>-->
+
+<div style="width: 1400px; margin: auto; margin-top: 20px;">
+    <p style="font-weight: bold;font-size :26px;">Nanozyme details</p>
+    <!-- 表格 -->
+    <form class="layui-form layui-form-pane" id="btn-submit" style="margin: 20px">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Name</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" id="name" required autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Mimic enzyme activity</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="mimic_enzyme_activity" id="mimic_enzyme_activity" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">N</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="n" id="n" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">P</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="p" id="p" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">S</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s" id="s" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Si</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="si" id="si" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width:240px">Se</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="se" id="se" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">B</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="b" id="b" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">F</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="f" id="f" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Cl</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="cl" id="cl" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Br</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="br" id="br" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">I</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="i" id="i" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Metal ratio</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="metal_ratio" id="metal_ratio" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Metal type</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="metal_type" id="metal_type" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Metal valence</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="metal_valence" id="metal_valence" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Submetal ratio</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="submetal_ratio" id="submetal_ratio" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Submetal type</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="submetal_type" id="submetal_type" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Submetal valence</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="submetal_valence" id="submetal_valence" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">3rd metal ratio</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="_3rd_metal_ratio" id="_3rd_metal_ratio" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">3rd metal type</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="_3rd_metal_type" id="_3rd_metal_type" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">3rd metal valence</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="_3rd_metal_valence" id="_3rd_metal_valence" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">4th metal ratio</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="_4th_metal_ratio" id="_4th_metal_ratio" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">4th metal type</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="_4th_metal_type" id="_4th_metal_type" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">4th metal valence</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="_4th_metal_valence" id="_4th_metal_valence" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">shape</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="shape" id="shape" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Size/nm</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="size_per_nm" id="size_per_nm" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Surface modification</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="surface_modification" id="surface_modification" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Dispersion medium</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="dispersion_medium" id="dispersion_medium" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Buffer pH value</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="buffer_ph_value" id="buffer_ph_value" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Buffer pH</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="buffer_ph" id="buffer_ph" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Temperature/℃</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="temperature" id="temperature" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Substrate1</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="substrate1" id="substrate1" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Substrate2</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="substrate2" id="substrate2" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Substrate2 concentration(mM)</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="substrate2_concentration_mm" id="substrate2_concentration_mm"
+                           autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">Km/mM</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="km_per_mm" id="km_per_mm" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">Vmax/μM s-1</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="vmax_micro_m_per_s" id="vmax_micro_m_per_s" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">Kcat/s-1</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="kcat_per_s" id="kcat_per_s" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">k cat /Km
+                    (Catalytic efficiency )/M-1 s-1</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="k_cat_per_Km_per_mol_per_s" id="k_cat_per_Km_per_mol_per_s"
+                           autocomplete="off" class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 160px">IC50 (SOD) /μM</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ic50_per_micro_mol" id="ic50_per_micro_mol" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">num</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="num" id="num" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 275px">data reference doi</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="data_reference_doi" id="data_reference_doi" autocomplete="off"
+                           class="layui-input" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: 240px">path</label>
+                <div class="layui-input-inline">
+                    <textarea type="text" name="path" id="path" utocomplete="off"
+                              class="layui-input" readonly style="width: 1050px; height: 150px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--页脚-->
+
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='darkreader/darkreader.min.js') }}"></script>
+
+<script>
+    DarkReader.enable({
+        brightness: 200,
+        contrast: 150,
+        sepia: -30
+    });
+
+    layui.use(['jquery'], function () {
+        let $ = layui.jquery
+
+        $(document).ready(function () {
+            // 获取URL中的ID参数
+            var urlParams = new URLSearchParams(window.location.search);
+
+            // 在表单中自动渲染数据
+            $.ajax({
+                url: '/nano_enzy_data/data_details',
+                data: {details_id: urlParams.get("id")},
+                dataType: 'json',
+                type: 'post',
+                success: function (result) {
+                    console.log(result['data'])
+                    $("#name").val(result['data'][0].name)
+                    $("#mimic_enzyme_activity").val(result['data'][0].mimic_enzyme_activity)
+                    $("#n").val(result['data'][0].n)
+                    $("#p").val(result['data'][0].p)
+                    $("#s").val(result['data'][0].s)
+                    $("#si").val(result['data'][0].si)
+                    $("#se").val(result['data'][0].se)
+                    $("#b").val(result['data'][0].b)
+                    $("#f").val(result['data'][0].f)
+                    $("#cl").val(result['data'][0].cl)
+                    $("#br").val(result['data'][0].br)
+                    $("#i").val(result['data'][0].i)
+                    $("#metal_ratio").val(result['data'][0].metal_ratio)
+                    $("#metal_type").val(result['data'][0].metal_type)
+                    $("#metal_valence").val(result['data'][0].metal_valence)
+                    $("#submetal_ratio").val(result['data'][0].submetal_ratio)
+                    $("#submetal_type").val(result['data'][0].submetal_type)
+                    $("#submetal_valence").val(result['data'][0].submetal_valence)
+                    $("#_3rd_metal_ratio").val(result['data'][0]._3rd_metal_ratio)
+                    $("#_3rd_metal_type").val(result['data'][0]._3rd_metal_type)
+                    $("#_3rd_metal_valence").val(result['data'][0]._3rd_metal_valence)
+                    $("#_4th_metal_ratio").val(result['data'][0]._4th_metal_ratio)
+                    $("#_4th_metal_type").val(result['data'][0]._4th_metal_type)
+                    $("#_4th_metal_valence").val(result['data'][0]._4th_metal_valence)
+                    $("#shape").val(result['data'][0].shape)
+                    $("#size_per_nm").val(result['data'][0].size_per_nm)
+                    $("#surface_modification").val(result['data'][0].surface_modification)
+                    $("#dispersion_medium").val(result['data'][0].dispersion_medium)
+                    $("#buffer_ph_value").val(result['data'][0].buffer_ph_value)
+                    $("#buffer_ph").val(result['data'][0].buffer_ph)
+                    $("#temperature").val(result['data'][0].temperature)
+                    $("#substrate1").val(result['data'][0].substrate1)
+                    $("#substrate2").val(result['data'][0].substrate2)
+                    $("#substrate2_concentration_mm").val(result['data'][0].substrate2_concentration_mm)
+                    $("#km_per_mm").val(result['data'][0].km_per_mm)
+                    $("#vmax_micro_m_per_s").val(result['data'][0].vmax_micro_m_per_s)
+                    $("#kcat_per_s").val(result['data'][0].kcat_per_s)
+                    $("#k_cat_per_Km_per_mol_per_s").val(result['data'][0].k_cat_per_Km_per_mol_per_s)
+                    $("#ic50_per_micro_mol").val(result['data'][0].ic50_per_micro_mol)
+                    $("#data_reference_doi").val(result['data'][0].data_reference_doi)
+                    $("#path").val(result['data'][0].path)
+                    $("#num").val(result['data'][0].num)
+                },
+            });
+        });
+    })
+</script>
+</body>
+</html>
+
+<footer style="position: fixed; bottom: 0px; width: 100%; height:60px;
+            background-color: #eee;
+            text-align: center;">
+    <div style="margin-top: 14px">
+        <p>AHUCM 2024 &copy; ahtcm.edu.cn</p>
+        <p>Anhui University of Chinese Medicine</p>
+    </div>
+</footer>
+
